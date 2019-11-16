@@ -2,9 +2,12 @@ package model
 
 import "time"
 
-type AnswerReplies struct {
+type AnswerReply struct {
 	ID     uint
-	User   User
+	
+	Replier User `gorm:"foreignkey:ReplierID"`
+	ReplierID uint
+	
 	Answer Answer
 
 	CreatedAt time.Time

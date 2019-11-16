@@ -4,5 +4,5 @@ type Tag struct {
 	ID   uint
 	Name string
 
-	Missions []Mission
+	Missions []Mission `gorm:"many2many:mission_tags"`
 }

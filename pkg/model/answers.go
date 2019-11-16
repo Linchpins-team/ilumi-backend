@@ -6,7 +6,9 @@ import (
 
 type Answer struct {
 	ID      uint
-	Author  User
+	Author  User `gorm:"foreignkey:AuthorID"`
+	AuthorID uint
+	
 	Mission Mission
 
 	Content string
