@@ -13,5 +13,9 @@ func main() {
 	log.Println("Got conf", conf)
 	db := database.New(conf)
 	log.Println("Got db", db)
-	router.RunServer(conf, db)
+	r := router.SetupServer(conf, db)
+	log.Printf("Server has started on http://%s:%s\n", conf.Host, conf.Port)
+	if err := r.Run(":" + conf.Port); err != nil {
+		panic(err)
+	}
 }

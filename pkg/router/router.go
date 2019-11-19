@@ -1,22 +1,23 @@
 package router
 
 import (
-	"fmt"
-
 	"github.com/Linchpins-team/ilumi-backend/pkg/config"
 	"github.com/Linchpins-team/ilumi-backend/pkg/database"
+	"github.com/Linchpins-team/ilumi-backend/pkg/handler"
 	"github.com/Linchpins-team/ilumi-backend/pkg/middleware"
 	"github.com/gin-gonic/gin"
 )
 
 // RunServer starts a Gin Engine
-func RunServer(conf config.Config, db database.DB) {
+func SetupServer(conf config.Config, db database.DB) *gin.Engine {
 	router := gin.Default()
 	v1 := router.Group("/v1")
 	{
 		v1.Use(middleware.AddDatabase(db))
 		users := v1.Group("/users")
 		{
+			users.GET("/")
+			users.POST("", handler.Join)
 			users.GET("/:uid")
 			users.POST("/:uid")
 			users.DELETE("/:uid")
@@ -45,8 +46,5 @@ func RunServer(conf config.Config, db database.DB) {
 		v1.POST("/login")
 		v1.GET("/logout")
 	}
-	fmt.Printf("Server has started on http://%s:%s", conf.Host, conf.Port)
-	if err := router.Run(":" + conf.Port); err != nil {
-		panic(err)
-	}
+	return router
 }
