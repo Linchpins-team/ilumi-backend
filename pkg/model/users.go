@@ -8,7 +8,7 @@ type User struct {
 	ID         uint
 	Name       string
 	Protrait   string
-	Email      string
+	Email      string `gorm:"unique;not null"`
 	JoinedAt   time.Time
 	LastOnline time.Time
 

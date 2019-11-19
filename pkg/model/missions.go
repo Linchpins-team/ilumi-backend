@@ -5,8 +5,8 @@ import (
 )
 
 type Mission struct {
-	ID     uint
-	Author User `gorm:"foreignkey:AuthorID"`
+	ID       uint
+	Author   User `gorm:"foreignkey:AuthorID"`
 	AuthorID uint
 
 	Title     string

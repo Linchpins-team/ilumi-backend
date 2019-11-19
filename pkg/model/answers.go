@@ -5,10 +5,10 @@ import (
 )
 
 type Answer struct {
-	ID      uint
-	Author  User `gorm:"foreignkey:AuthorID"`
+	ID       uint
+	Author   User `gorm:"foreignkey:AuthorID"`
 	AuthorID uint
-	
+
 	Mission Mission
 
 	Content string
